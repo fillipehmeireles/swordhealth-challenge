@@ -24,4 +24,15 @@ func Routes(r *gin.Engine) {
 		managerRoutes.PUT(updateRoute, managerController.Update)
 		managerRoutes.DELETE(deleteRoute, managerController.Delete)
 	}
+
+	technicianRoutes := r.Group("/technician")
+	{
+		technicianController := controllers.NewTechnicianControllers()
+		technicianRoutes.POST(createRoute, technicianController.Create)
+		technicianRoutes.GET(readAllRoute, technicianController.ReadAll)
+		technicianRoutes.GET(readOneRoute, technicianController.ReadOne)
+		technicianRoutes.PUT(updateRoute, technicianController.Update)
+		technicianRoutes.DELETE(deleteRoute, technicianController.Delete)
+	}
+
 }
