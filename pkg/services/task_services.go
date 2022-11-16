@@ -27,3 +27,15 @@ func (service *TaskServices) Create(taskDto dtos.CreateTaskDto) (int, error) {
 func (service *TaskServices) Update(id int, taskDto dtos.UpdateTaskDto) (int, error) {
 	return service.repository.Update(id, taskDto)
 }
+
+func (service *TaskServices) GetAllTasksOfTechnician(technicianID int) ([]models.Task, error) {
+	return service.repository.ReadAllTasksOfTechnician(technicianID)
+}
+
+func (service *TaskServices) GetOneTaskOfTechnician(id, technicianID int) (models.Task, error) {
+	return service.repository.ReadOneTaskOfTechnician(id, technicianID)
+}
+
+func (service *TaskServices) ChangeTaskStatus(id, techID int, taskDto dtos.TaskStatusDto) (int, error) {
+	return service.repository.ChangeTaskStatus(id, taskDto, techID)
+}

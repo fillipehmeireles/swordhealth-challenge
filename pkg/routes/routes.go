@@ -2,6 +2,7 @@ package routes
 
 import (
 	"SwordHealth/pkg/controllers"
+	"SwordHealth/pkg/middlewares"
 
 	"github.com/gin-gonic/gin"
 )
@@ -38,11 +39,14 @@ func Routes(r *gin.Engine) {
 	taskRoutes := r.Group("/task")
 	{
 		taskController := controllers.NewTaskControllers()
-		taskRoutes.POST(createRoute, taskController.Create)
+		taskRoutes.POST(createRoute, middlewares.TechAuth, taskController.Create)
 		taskRoutes.GET(readAllRoute, taskController.ReadAll)
 		taskRoutes.GET(readOneRoute, taskController.ReadOne)
-		taskRoutes.PUT(updateRoute, taskController.Update)
+		taskRoutes.PUT(updateRoute, middlewares.TechAuth, taskController.Update)
 		taskRoutes.DELETE(deleteRoute, taskController.Delete)
+		taskRoutes.GET("/technician", middlewares.TechAuth, taskController.ReadAllTasksOfTechnician)
+		taskRoutes.GET("/technician/:id", middlewares.TechAuth, taskController.ReadOneTaskOfTechnician)
+		taskRoutes.PATCH("/change_status/:id", middlewares.TechAuth, taskController.ChangeTaskStatus)
 	}
 
 }

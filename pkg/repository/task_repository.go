@@ -4,6 +4,7 @@ import (
 	"SwordHealth/pkg/drivers"
 	dtos "SwordHealth/pkg/dtos/task"
 	"SwordHealth/pkg/models"
+	"errors"
 )
 
 type TaskRepository struct {
@@ -41,6 +42,10 @@ func (repo *TaskRepository) Update(id int, taskDto dtos.UpdateTaskDto) (int, err
 	repo.db.Connect()
 	defer repo.db.Close()
 
+	if task.TechnicianID != taskDto.TechnicianID {
+		return 0, errors.New("Could not update a task which is not assigned to you.")
+	}
+
 	taskModel := models.Task{
 		Title:        taskDto.Title,
 		Summary:      taskDto.Summary,
@@ -72,4 +77,46 @@ func (repo *TaskRepository) ReadOne(id int) (models.Task, error) {
 	}
 
 	return oneData, nil
+}
+
+func (repo *TaskRepository) ReadAllTasksOfTechnician(technicianID int) ([]models.Task, error) {
+	repo.db.Connect()
+	defer repo.db.Close()
+
+	var allData []models.Task
+	repo.db.DB.Preload("Technician").Where("technician_id = ?", technicianID).Find(&allData)
+	return allData, nil
+}
+
+func (repo *TaskRepository) ReadOneTaskOfTechnician(id, technicianID int) (models.Task, error) {
+	repo.db.Connect()
+	defer repo.db.Close()
+
+	var oneData models.Task
+	if err := repo.db.DB.Preload("Technician").Where("technician_id = ?", technicianID).First(&oneData, id); err != nil {
+		return oneData, err.Error
+	}
+	return oneData, nil
+}
+
+func (repo *TaskRepository) ChangeTaskStatus(id int, taskDto dtos.TaskStatusDto, techID int) (int, error) {
+	task, err := repo.ReadOne(id)
+	if err != nil {
+		return 0, err
+	}
+	if task.TechnicianID != techID {
+		return 0, errors.New("Could not update a task which is not assigned to you.")
+	}
+
+	repo.db.Connect()
+	defer repo.db.Close()
+
+	taskModel := models.Task{
+		Status: taskDto.Status,
+	}
+
+	result := repo.db.DB.Model(&task).Updates(taskModel)
+
+	return int(result.RowsAffected), result.Error
+
 }

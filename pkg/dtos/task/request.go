@@ -11,3 +11,7 @@ type UpdateTaskDto struct {
 	Summary      string `json:"summary,omitempty"`
 	TechnicianID int    `json:"technician_id,omitempty"`
 }
+
+type TaskStatusDto struct {
+	Status bool `json:"status"`
+}
