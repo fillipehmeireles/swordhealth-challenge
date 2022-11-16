@@ -1,8 +1,8 @@
 package drivers
 
 import (
+	"SwordHealth/pkg/api/models"
 	"SwordHealth/pkg/config"
-	"SwordHealth/pkg/models"
 	"log"
 
 	"github.com/jinzhu/gorm"

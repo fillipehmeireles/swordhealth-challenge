@@ -1,8 +1,8 @@
 package controllers
 
 import (
-	dtos "SwordHealth/pkg/dtos/task"
-	"SwordHealth/pkg/services"
+	dtos "SwordHealth/pkg/api/dtos/task"
+	"SwordHealth/pkg/api/services"
 	"net/http"
 	"strconv"
 

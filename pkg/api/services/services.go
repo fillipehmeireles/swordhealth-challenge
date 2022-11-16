@@ -1,8 +1,6 @@
 package services
 
-import (
-	"SwordHealth/pkg/repository"
-)
+import "SwordHealth/pkg/api/repository"
 
 type Services[T any, U repository.IRepository[T]] struct {
 	repository U

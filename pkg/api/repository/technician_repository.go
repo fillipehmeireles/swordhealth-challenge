@@ -1,9 +1,9 @@
 package repository
 
 import (
-	"SwordHealth/pkg/drivers"
-	dtos "SwordHealth/pkg/dtos/technician"
-	"SwordHealth/pkg/models"
+	"SwordHealth/pkg/api/drivers"
+	dtos "SwordHealth/pkg/api/dtos/technician"
+	"SwordHealth/pkg/api/models"
 )
 
 type TechnicianRepository struct {

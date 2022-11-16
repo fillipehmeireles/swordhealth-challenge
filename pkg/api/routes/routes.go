@@ -1,8 +1,8 @@
 package routes
 
 import (
-	"SwordHealth/pkg/controllers"
-	"SwordHealth/pkg/middlewares"
+	"SwordHealth/pkg/api/controllers"
+	"SwordHealth/pkg/api/middlewares"
 
 	"github.com/gin-gonic/gin"
 )

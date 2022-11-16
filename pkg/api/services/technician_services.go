@@ -1,10 +1,10 @@
 package services
 
 import (
-	dtos "SwordHealth/pkg/dtos/technician"
-	"SwordHealth/pkg/encrypt"
-	"SwordHealth/pkg/models"
-	"SwordHealth/pkg/repository"
+	dtos "SwordHealth/pkg/api/dtos/technician"
+	"SwordHealth/pkg/api/encrypt"
+	"SwordHealth/pkg/api/models"
+	"SwordHealth/pkg/api/repository"
 )
 
 type TechnicianServices struct {

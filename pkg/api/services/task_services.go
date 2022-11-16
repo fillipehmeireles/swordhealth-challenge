@@ -1,9 +1,10 @@
 package services
 
 import (
-	dtos "SwordHealth/pkg/dtos/task"
-	"SwordHealth/pkg/models"
-	"SwordHealth/pkg/repository"
+	dtos "SwordHealth/pkg/api/dtos/task"
+	"SwordHealth/pkg/api/models"
+	"SwordHealth/pkg/api/repository"
+	"SwordHealth/pkg/messagebroker"
 )
 
 type TaskServices struct {
@@ -37,5 +38,14 @@ func (service *TaskServices) GetOneTaskOfTechnician(id, technicianID int) (model
 }
 
 func (service *TaskServices) ChangeTaskStatus(id, techID int, taskDto dtos.TaskStatusDto) (int, error) {
-	return service.repository.ChangeTaskStatus(id, taskDto, techID)
+	task, result, err := service.repository.ChangeTaskStatus(id, taskDto, techID)
+	if err != nil {
+		return 0, err
+	}
+	mqp := messagebroker.NewMQProducer()
+	if err := mqp.Produce(task.Technician.Name, task.Title, task.TechnicianID, int(task.ID), task.PerformedAt); err != nil {
+		return 0, err
+	}
+
+	return int(result), nil
 }

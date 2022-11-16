@@ -1,10 +1,11 @@
 package repository
 
 import (
-	"SwordHealth/pkg/drivers"
-	dtos "SwordHealth/pkg/dtos/task"
-	"SwordHealth/pkg/models"
+	"SwordHealth/pkg/api/drivers"
+	dtos "SwordHealth/pkg/api/dtos/task"
+	"SwordHealth/pkg/api/models"
 	"errors"
+	"time"
 )
 
 type TaskRepository struct {
@@ -99,24 +100,25 @@ func (repo *TaskRepository) ReadOneTaskOfTechnician(id, technicianID int) (model
 	return oneData, nil
 }
 
-func (repo *TaskRepository) ChangeTaskStatus(id int, taskDto dtos.TaskStatusDto, techID int) (int, error) {
+func (repo *TaskRepository) ChangeTaskStatus(id int, taskDto dtos.TaskStatusDto, techID int) (models.Task, int, error) {
 	task, err := repo.ReadOne(id)
 	if err != nil {
-		return 0, err
+		return models.Task{}, 0, err
 	}
 	if task.TechnicianID != techID {
-		return 0, errors.New("Could not update a task which is not assigned to you.")
+		return models.Task{}, 0, errors.New("Could not update a task which is not assigned to you.")
 	}
 
 	repo.db.Connect()
 	defer repo.db.Close()
 
 	taskModel := models.Task{
-		Status: taskDto.Status,
+		Status:      taskDto.Status,
+		PerformedAt: time.Now(),
 	}
 
 	result := repo.db.DB.Model(&task).Updates(taskModel)
 
-	return int(result.RowsAffected), result.Error
+	return task, int(result.RowsAffected), result.Error
 
 }

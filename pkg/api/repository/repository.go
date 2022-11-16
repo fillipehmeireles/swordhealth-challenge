@@ -1,8 +1,6 @@
 package repository
 
-import (
-	"SwordHealth/pkg/drivers"
-)
+import "SwordHealth/pkg/api/drivers"
 
 type IRepository[T any] interface {
 	ReadAll() ([]T, error)

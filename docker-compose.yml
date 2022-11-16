@@ -30,6 +30,18 @@ services:
     networks:
       - dev
 
+  rabbit-mq:
+    image: rabbitmq:3-management
+    hostname: "rabbitmqswordh"
+    container_name: rabbitmq_sword_health
+    ports:
+      - 5672:5672
+      - 15672:15672
+    volumes:
+      - ./docker/rabbitmq:/var/lib/rabbitmq
+    networks:
+      - dev
+
 networks:
   dev:
     driver: bridge

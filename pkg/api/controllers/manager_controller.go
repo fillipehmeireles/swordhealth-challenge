@@ -1,28 +1,28 @@
 package controllers
 
 import (
-	dtos "SwordHealth/pkg/dtos/technician"
-	"SwordHealth/pkg/services"
+	dtos "SwordHealth/pkg/api/dtos/manager"
+	"SwordHealth/pkg/api/services"
 	"net/http"
 	"strconv"
 
 	"github.com/gin-gonic/gin"
 )
 
-type TechnicianControllers struct {
-	service *services.TechnicianServices
+type ManagerControllers struct {
+	service *services.ManagerServices
 }
 
-func NewTechnicianControllers() *TechnicianControllers {
-	return &TechnicianControllers{service: services.NewTechnicianServices()}
+func NewManagerControllers() *ManagerControllers {
+	return &ManagerControllers{service: services.NewManagerServices()}
 }
 
-func (controller *TechnicianControllers) ReadAll(c *gin.Context) {
-	technicians, _ := controller.service.GetAll()
-	c.JSON(http.StatusOK, technicians)
+func (controller *ManagerControllers) ReadAll(c *gin.Context) {
+	managers, _ := controller.service.GetAll()
+	c.JSON(http.StatusOK, managers)
 }
 
-func (controller *TechnicianControllers) ReadOne(c *gin.Context) {
+func (controller *ManagerControllers) ReadOne(c *gin.Context) {
 	id := c.Param("id")
 	idParsed, err := strconv.Atoi(id)
 	if err != nil {
@@ -30,25 +30,25 @@ func (controller *TechnicianControllers) ReadOne(c *gin.Context) {
 		return
 	}
 
-	technician, err := controller.service.GetOne(idParsed)
+	manager, err := controller.service.GetOne(idParsed)
 
 	if err != nil {
 		c.JSON(http.StatusOK, gin.H{"message": err.Error()})
 		return
 	}
 
-	c.JSON(http.StatusOK, technician)
+	c.JSON(http.StatusOK, manager)
 }
 
-func (controller *TechnicianControllers) Create(c *gin.Context) {
-	var technician dtos.CreateTechnicianDto
+func (controller *ManagerControllers) Create(c *gin.Context) {
+	var manager dtos.CreateManagerDTO
 
-	if err := c.BindJSON(&technician); err != nil {
+	if err := c.BindJSON(&manager); err != nil {
 		c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"message": err.Error()})
 		return
 	}
 
-	result, err := controller.service.Create(technician)
+	result, err := controller.service.Create(manager)
 
 	if err != nil {
 		c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"message": err.Error()})
@@ -58,7 +58,7 @@ func (controller *TechnicianControllers) Create(c *gin.Context) {
 	c.JSON(http.StatusCreated, gin.H{"Lines Affected": result})
 }
 
-func (controller *TechnicianControllers) Update(c *gin.Context) {
+func (controller *ManagerControllers) Update(c *gin.Context) {
 	id := c.Param("id")
 	idParsed, err := strconv.Atoi(id)
 	if err != nil {
@@ -66,14 +66,14 @@ func (controller *TechnicianControllers) Update(c *gin.Context) {
 		return
 	}
 
-	var technician dtos.UpdateTechnicianDto
+	var manager dtos.UpdateManagerDTO
 
-	if err := c.BindJSON(&technician); err != nil {
+	if err := c.BindJSON(&manager); err != nil {
 		c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"message": err.Error()})
 		return
 	}
 
-	result, err := controller.service.Update(idParsed, technician)
+	result, err := controller.service.Update(idParsed, manager)
 
 	if err != nil {
 		c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"message": err.Error()})
@@ -84,7 +84,7 @@ func (controller *TechnicianControllers) Update(c *gin.Context) {
 
 }
 
-func (controller *TechnicianControllers) Delete(c *gin.Context) {
+func (controller *ManagerControllers) Delete(c *gin.Context) {
 	id := c.Param("id")
 	idParsed, err := strconv.Atoi(id)
 	if err != nil {
