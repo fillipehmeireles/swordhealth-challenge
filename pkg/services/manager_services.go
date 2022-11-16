@@ -2,6 +2,7 @@ package services
 
 import (
 	dtos "SwordHealth/pkg/dtos/manager"
+	"SwordHealth/pkg/encrypt"
 	"SwordHealth/pkg/models"
 	"SwordHealth/pkg/repository"
 )
@@ -15,6 +16,8 @@ func NewManagerServices() *ManagerServices {
 }
 
 func (service *ManagerServices) Create(managerDto dtos.CreateManagerDTO) (int, error) {
+	hashedPass := encrypt.HashPass(managerDto.Password)
+	managerDto.Password = hashedPass
 	return service.repository.Create(managerDto)
 }
 

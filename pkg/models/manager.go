@@ -4,9 +4,7 @@ import "gorm.io/gorm"
 
 type Manager struct {
 	gorm.Model
-	Email    string
-	Password string
+	Email    string `gorm:"unique"`
+	Password string `json:"-"`
 	Name     string
-	//	CreatedAt time.Time `gorm:"autoCreateTime:true"`
-	//	UpdatedAt time.Time `gorm:"autoUpdateTime:true"`
 }

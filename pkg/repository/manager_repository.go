@@ -17,7 +17,6 @@ func NewManagerRepository() *ManagerRepository {
 func (repo *ManagerRepository) Create(managerDto dtos.CreateManagerDTO) (int, error) {
 	repo.db.Connect()
 	defer repo.db.Close()
-
 	manager := models.Manager{
 		Email:    managerDto.Email,
 		Password: managerDto.Password,

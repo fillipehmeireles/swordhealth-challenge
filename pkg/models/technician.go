@@ -5,6 +5,6 @@ import "gorm.io/gorm"
 type Technician struct {
 	gorm.Model
 	Email    string `gorm:"unique"`
-	Password string
+	Password string `json:"-"`
 	Name     string
 }
