@@ -52,17 +52,3 @@ func (repo *ManagerRepository) Update(id int, managerDto dtos.UpdateManagerDTO) 
 
 	return int(result.RowsAffected), result.Error
 }
-
-func (repo *ManagerRepository) Delete(id int) (int, error) {
-	manager, err := repo.ReadOne(id)
-	if err != nil {
-		return 0, err
-	}
-
-	repo.db.Connect()
-	defer repo.db.Close()
-
-	result := repo.db.DB.Delete(manager)
-
-	return int(result.RowsAffected), result.Error
-}

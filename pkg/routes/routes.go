@@ -35,4 +35,14 @@ func Routes(r *gin.Engine) {
 		technicianRoutes.DELETE(deleteRoute, technicianController.Delete)
 	}
 
+	taskRoutes := r.Group("/task")
+	{
+		taskController := controllers.NewTaskControllers()
+		taskRoutes.POST(createRoute, taskController.Create)
+		taskRoutes.GET(readAllRoute, taskController.ReadAll)
+		taskRoutes.GET(readOneRoute, taskController.ReadOne)
+		taskRoutes.PUT(updateRoute, taskController.Update)
+		taskRoutes.DELETE(deleteRoute, taskController.Delete)
+	}
+
 }

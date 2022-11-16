@@ -34,3 +34,17 @@ func (repo *Repository[T]) ReadOne(id int) (T, error) {
 
 	return oneData, nil
 }
+
+func (repo *Repository[T]) Delete(id int) (int, error) {
+	data, err := repo.ReadOne(id)
+	if err != nil {
+		return 0, err
+	}
+
+	repo.db.Connect()
+	defer repo.db.Close()
+
+	result := repo.db.DB.Delete(data)
+
+	return int(result.RowsAffected), result.Error
+}
