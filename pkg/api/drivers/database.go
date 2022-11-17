@@ -25,7 +25,6 @@ func NewDBDriver() *DatabaseDriver {
 }
 
 func (dbDriver *DatabaseDriver) Connect() {
-	log.Println(dbDriver.dbUrl)
 	db, err := gorm.Open("mysql", dbDriver.dbUrl)
 	if err != nil {
 		log.Fatal(err)

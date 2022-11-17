@@ -10,6 +10,7 @@ services:
       - "8080:8080"
     depends_on:
       - mysql
+      - rabbit-mq
     networks:
       - dev
     restart: on-failure
@@ -17,12 +18,10 @@ services:
   mysql:
     image: mysql
     container_name: mysql_sword_health
+    env_file:
+      - .env
     environment:
-      - MYSQL_ROOT_HOST=${MYSQL_ROOT_HOST}
-      - MYSQL_USER=${MYSQL_USER}
-      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
-      - MYSQL_DATABASE=${MYSQL_DATABASE}
-      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_ROOT_HOST=%
     ports:
       - 3306:3306
     volumes:

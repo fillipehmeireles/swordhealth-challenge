@@ -16,7 +16,7 @@ func NewManagerServices() *ManagerServices {
 }
 
 func (service *ManagerServices) Create(managerDto dtos.CreateManagerDTO) (int, error) {
-	hashedPass := encrypt.HashPass(managerDto.Password)
+	hashedPass, _ := encrypt.HashPass(managerDto.Password)
 	managerDto.Password = hashedPass
 	return service.repository.Create(managerDto)
 }

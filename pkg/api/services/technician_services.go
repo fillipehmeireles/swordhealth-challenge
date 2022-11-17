@@ -16,7 +16,7 @@ func NewTechnicianServices() *TechnicianServices {
 }
 
 func (service *TechnicianServices) Create(techDto dtos.CreateTechnicianDto) (int, error) {
-	hashedPass := encrypt.HashPass(techDto.Password)
+	hashedPass, _ := encrypt.HashPass(techDto.Password)
 	techDto.Password = hashedPass
 	return service.repository.Create(techDto)
 }

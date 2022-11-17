@@ -1,18 +1,15 @@
 package encrypt
 
 import (
-	"log"
-
 	"golang.org/x/crypto/bcrypt"
 )
 
-func HashPass(password string) string {
+func HashPass(password string) (string, error) {
 	hashPass, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
 	if err != nil {
-		log.Fatal(err.Error())
+		return "", err
 	}
-	return string(hashPass)
-
+	return string(hashPass), nil
 }
 
 func CheckPass(password, hash string) bool {

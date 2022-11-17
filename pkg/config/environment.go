@@ -26,14 +26,15 @@ func InitEnvironmentConfig() *Environment {
 
 	migrate, err := strconv.ParseBool(os.Getenv("MIGRATE"))
 	if err != nil {
-		log.Fatal("Error ib define migration action")
+		log.Println("MIGRATE not setted on env. Using default value (false).")
+		migrate = false
 	}
 
 	secret_key := os.Getenv("SECRET_KEY")
 
-	db_url := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=utf8&parseTime=true&loc=Local", os.Getenv("MYSQL_USER"), os.Getenv("MYSQL_PASSWORD"), os.Getenv("MYSQL_ROOT_HOST"), os.Getenv("DB_PORT"), os.Getenv("MYSQL_DATABASE"))
+	db_url := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=utf8&parseTime=true&loc=Local", os.Getenv("DB_USER"), os.Getenv("MYSQL_PASSWORD"), os.Getenv("MYSQL_ROOT_HOST"), os.Getenv("DB_PORT"), os.Getenv("MYSQL_DATABASE"))
 	fmt.Println(db_url)
-	fmt.Println(os.Getenv("RMQ_URL"))
+
 	return &Environment{
 		DB_URL:     db_url,
 		MIGRATE:    migrate,
