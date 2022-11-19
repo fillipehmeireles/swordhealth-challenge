@@ -19,6 +19,7 @@ func migrationManager() {
 		dbDriver.Migrate()
 	}
 }
+
 func ApiListener(waitGroup *sync.WaitGroup) {
 	migrationManager()
 	defer waitGroup.Done()

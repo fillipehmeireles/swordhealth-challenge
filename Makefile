@@ -14,6 +14,5 @@ docker-up-mq:
 	sudo docker-compose up -d $(DOCKER_MQ_SERVICE)
 
 docker-build-run:
-	sudo docker-compose build && sudo docker-compose up -d
-
+	sudo docker-compose up -d --build
 

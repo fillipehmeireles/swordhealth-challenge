@@ -1,0 +1,373 @@
+{
+	"info": {
+		"_postman_id": "dd421f08-218d-4ef2-8ede-160535f6694f",
+		"name": "Sword health",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "11228366"
+	},
+	"item": [
+		{
+			"name": "Manager",
+			"item": [
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\":\"fillipe.tester@gmail.com\",\n    \"password\":\"12345\",\n    \"name\":\"fillipe01\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/manager/create",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"manager",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Read",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/manager/read-one/1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"manager",
+								"read-one",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\":\"fillipe1.manager\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/manager/update/2",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"manager",
+								"update",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/manager/delete/1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"manager",
+								"delete",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Technician",
+			"item": [
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\":\"henrique.t@gmail.com\",\n    \"password\":\"tech\",\n    \"name\":\"henrique.tech\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/technician/create",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"technician",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Read",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/technician/read-one/1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"technician",
+								"read-one",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\":\"fillipe.1.tech\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/technician/update/1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"technician",
+								"update",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/technician/delete/3",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"technician",
+								"delete",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Task",
+			"item": [
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Technician_id",
+								"value": "{{tech_id}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\":\"Task henrique 1\",\n    \"summary\": \"Test task H1\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/task/create",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"task",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Read",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/task/read-all",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"task",
+								"read-all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Technician_id",
+								"value": "{{tech_id}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\":\"Task henrique 01\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/task/update/1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"task",
+								"update",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Change task status",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Technician_id",
+								"value": "{{tech_id}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"status\":true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/task/change_status/1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"task",
+								"change_status",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/task/delete/2",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"task",
+								"delete",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Technician tasks",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Technician_id",
+								"value": "{{tech_id}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/task/technician",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"task",
+								"technician"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
