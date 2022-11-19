@@ -14,7 +14,8 @@ SwordHealth Task Manager.
 
 ## Screenshots
 
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+![Dev Screenshot](https://user-images.githubusercontent.com/36938063/202851589-1aea18fa-b5fe-43d1-95b7-588f4b23f9ed.png)
+
 
 
 ## Deployment
@@ -59,5 +60,6 @@ To run this project, you will need to add the following environment variables to
 ## Performed Task Notification
 
 When a task is performed, a notification event is triggered:
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+
+![event-notification](https://user-images.githubusercontent.com/36938063/202851459-b400333d-6ea2-4b20-8d77-51566e4b1298.png)
 
