@@ -16,6 +16,8 @@ const (
 )
 
 func Routes(r *gin.Engine) {
+	r.GET("/", controllers.IndexController)
+
 	managerRoutes := r.Group("/manager")
 	{
 		managerController := controllers.NewManagerControllers()

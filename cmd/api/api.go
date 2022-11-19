@@ -17,11 +17,7 @@ func migrationManager() {
 		defer dbDriver.Close()
 		log.Println("[i] - Migration is ON")
 		dbDriver.Migrate()
-	} else {
-
-		log.Println("[i] - Migration is OFF")
 	}
-
 }
 func ApiListener(waitGroup *sync.WaitGroup) {
 	migrationManager()

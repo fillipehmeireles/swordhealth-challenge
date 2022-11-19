@@ -1,7 +1,6 @@
 package middlewares
 
 import (
-	"fmt"
 	"net/http"
 	"strconv"
 
@@ -10,7 +9,6 @@ import (
 
 func TechAuth(c *gin.Context) {
 	technicianHeader := c.Request.Header["Technician_id"]
-	fmt.Println(c.Request.Header)
 	if len(technicianHeader) == 0 {
 		c.AbortWithStatusJSON(http.StatusForbidden, gin.H{"message": "Please provide the technician ID"})
 		return

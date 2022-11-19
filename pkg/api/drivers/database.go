@@ -29,7 +29,7 @@ func (dbDriver *DatabaseDriver) Connect() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	log.Println("Database Connected")
+	log.Println("[i] Database Connected")
 
 	dbDriver.DB = db
 }
